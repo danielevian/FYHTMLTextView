@@ -1,40 +1,27 @@
-#
-# Be sure to run `pod lib lint FYHTMLTextView.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
-  s.name             = "FYHTMLTextView"
-  s.version          = "0.1.0"
-  s.summary          = "A short description of FYHTMLTextView."
 
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!  
-  s.description      = <<-DESC
-                       DESC
+s.name         = "FYHTMLTextView"
+s.version      = "1.0.0"
+s.summary      = "UITextView that parses HTML code and transform it to native views."
+s.description  = <<-DESC
+UITextView that parses HTML code and transform it to NSAttributedString. Also transforms Instagram, Twitter and others embedeed objects to native views.
+DESC
 
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/FYHTMLTextView"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
-  s.license          = 'MIT'
-  s.author           = { "Francisco Yarad" => "fyarad95@gmail.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/FYHTMLTextView.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+s.homepage     = "https://github.com/fyarad/FYHTMLTextView"
+s.license      = "MIT"
+s.author       = { "Francisco Yarad" => "fyarad95@gmail.com" }
 
-  s.platform     = :ios, '7.0'
-  s.requires_arc = true
+s.platform     = :ios
+s.platform     = :ios, "7.0"
 
-  s.source_files = 'Pod/Classes/**/*'
-  s.resource_bundles = {
-    'FYHTMLTextView' => ['Pod/Assets/*.png']
-  }
+s.source       = { :git => "https://github.com/fyarad/FYHTMLTextView.git", :tag => "1.0.0" }
+s.source_files  = "Classes", "Pod/Classes/**/*.{h,m}"
+s.exclude_files = "Classes/Exclude"
+s.requires_arc = true
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+s.dependency 'DTCoreText', '~> 1.6.16'
+s.dependency 'SDWebImage'
+
+
 end
+

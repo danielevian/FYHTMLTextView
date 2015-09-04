@@ -1,0 +1,6 @@
+framework module DTCoreText {
+  umbrella header "Pods-FYHTMLTextView_Example-DTCoreText-umbrella.h"
+
+  export *
+  module * { export * }
+}

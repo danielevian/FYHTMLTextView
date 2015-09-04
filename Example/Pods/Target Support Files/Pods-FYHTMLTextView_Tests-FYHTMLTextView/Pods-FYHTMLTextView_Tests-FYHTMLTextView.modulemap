@@ -1,0 +1,6 @@
+framework module FYHTMLTextView {
+  umbrella header "Pods-FYHTMLTextView_Tests-FYHTMLTextView-umbrella.h"
+
+  export *
+  module * { export * }
+}

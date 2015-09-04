@@ -28,10 +28,7 @@
     return nil;
 }
 - (void)reLayout {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.textContentView.layouter = nil;
-        [self.textContentView relayoutText];
-    });
+    if (self.textView) [self.textView relayout];
 }
 
 @end

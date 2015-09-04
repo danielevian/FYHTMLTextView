@@ -7,10 +7,11 @@
 //
 
 #import <DTCoreText/DTCoreText.h>
+#import "FYHTMLTextView.h"
 
 @interface FYAttachment : DTTextAttachment
 
-@property (nonatomic, strong) DTAttributedTextContentView *textContentView;
+@property (nonatomic, strong) FYHTMLTextView *textView;
 @property (nonatomic, strong) UIView *contentView;
 
 - (UIView*)attachmentViewWithFrame:(CGRect)frame;

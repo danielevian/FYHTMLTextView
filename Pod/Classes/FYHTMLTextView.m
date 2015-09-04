@@ -76,9 +76,9 @@
     
     if (!result && [attachment isKindOfClass:[FYAttachment class]]) {
         [(FYAttachment*)attachment setTextView:self];
-        return [(FYAttachment*)attachment attachmentViewWithFrame:frame];
+        result = [(FYAttachment*)attachment attachmentViewWithFrame:frame];
     }
-    return nil;
+    return result;
 }
 - (UIView*)attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView viewForLink:(NSURL *)url identifier:(NSString *)identifier frame:(CGRect)frame {
     DTLinkButton *button = [[DTLinkButton alloc] init];

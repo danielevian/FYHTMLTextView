@@ -14,8 +14,8 @@
 
 - (id)initWithElement:(DTHTMLElement *)element options:(NSDictionary *)options {
     self = [super initWithElement:element options:options];
-    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-    self.originalSize = CGSizeMake(screenWidth - 30, screenWidth + 30);
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width - 40;
+    self.originalSize = CGSizeMake(screenWidth, screenWidth);
     return self;
     
 }

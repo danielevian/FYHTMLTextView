@@ -1,6 +1,6 @@
 //
 //  FYHTMLTextView.m
-//  
+//
 //
 //  Created by Francisco Yarad on 9/4/15.
 //
@@ -26,22 +26,18 @@
         frame.size.height = CGFLOAT_HEIGHT_UNKNOWN;
         frame.size.height = [[[DTCoreTextLayouter alloc] initWithAttributedString:attributedString] layoutFrameWithRect:frame range:NSMakeRange(0, attributedString.length)].frame.size.height;
         
-        self.textView = [[DTAttributedTextView alloc] init];
+        [self setFrame:frame];
+        [self setBackgroundColor:[UIColor clearColor]];
+        
+        self.textView = [[DTAttributedTextView alloc] initWithFrame:self.bounds];
         [self.textView setScrollEnabled:NO];
         [self.textView setBackgroundColor:[UIColor clearColor]];
         [self.textView setTextDelegate:self];
         [self.textView setAttributedString:attributedString];
         [self addSubview:self.textView];
         
-        [self setFrame:frame];
-        [self setBackgroundColor:[UIColor clearColor]];
-
     }
     return self;
-}
-- (void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
-    [self.textView setFrame:self.bounds];
 }
 - (void)dealloc {
     [self forceDealloc];
@@ -51,12 +47,12 @@
     for (DTTextAttachment *attachment in [self.textView.attributedTextContentView.layoutFrame textAttachments]) {
         if ([attachment isKindOfClass:[FYAttachment class]]) [(FYAttachment*)attachment forceDealloc];
     }
-
+    
     [self.textView.subviews enumerateObjectsUsingBlock:^(UIView *obj, NSUInteger idx, BOOL *stop) {
         [obj.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         [obj removeFromSuperview];
     }];
-
+    
     [self.textView removeFromSuperview];
     self.textView = nil;
 }
@@ -70,7 +66,7 @@
 #pragma mark - DTAttributedTextContentView
 
 - (UIView *)attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView viewForAttachment:(DTTextAttachment *)attachment frame:(CGRect)frame {
-
+    
     UIView *result = nil;
     if (self.delegate && [self.delegate respondsToSelector:@selector(FYHTMLTextView:viewForAttachment:frame:)]) {
         result = [self.delegate FYHTMLTextView:self viewForAttachment:(FYAttachment*)attachment frame:frame];
@@ -93,15 +89,16 @@
 - (void)attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView didDrawLayoutFrame:(DTCoreTextLayoutFrame *)layoutFrame inContext:(CGContextRef)context {
     
     dispatch_async(dispatch_get_main_queue(), ^{
-
+        
         CGRect frame = self.frame;
-        frame.size.height = layoutFrame.frame.size.height;
+        frame.size.height = layoutFrame.frame.size.height + 15;
         self.frame = frame;
+        self.textView.frame = self.bounds;
         
         if (self.delegate && [self.delegate respondsToSelector:@selector(FYHTMLTextView:didUpdateHeight:)]) {
-            [self.delegate FYHTMLTextView:self didUpdateHeight:layoutFrame.frame.size.height];
+            [self.delegate FYHTMLTextView:self didUpdateHeight:frame.size.height];
         }
-
+        
     });
 }
 - (void)openLink:(DTLinkButton*)button {
@@ -115,7 +112,7 @@
 + (NSString*)parseHTMLContent:(NSString *)htmlString {
     
     __block NSString *result = htmlString;
-
+    
     [[[FYHTMLTextViewSettings sharedInstance] blockedTags] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         result = [htmlString removeTagsWithName:obj];
     }];

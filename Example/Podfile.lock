@@ -10,7 +10,7 @@ PODS:
     - DTFoundation/Core
   - DTFoundation/UIKit (1.7.7):
     - DTFoundation/Core
-  - FYHTMLTextView (1.0.9):
+  - FYHTMLTextView (1.1.0):
     - DTCoreText (~> 1.6.16)
 
 DEPENDENCIES:
@@ -23,6 +23,6 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   DTCoreText: 934a16fe9ffdd169c96261721b39dc312b75713d
   DTFoundation: c9b3362b83f0017389082ec067ede719826a579d
-  FYHTMLTextView: 5f45bfb5069ce08ee49e6f5d1ea64be177ba3e48
+  FYHTMLTextView: 4e4eb66257d2b8ac0c91cac8dccc92400f370b42
 
 COCOAPODS: 0.37.0

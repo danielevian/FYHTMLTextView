@@ -18,6 +18,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame htmlString:(NSString*)htmlString attributes:(FYTextViewAttributes*)attributes;
 - (void)forceDealloc;
+- (void)relayout;
 
 @end
 

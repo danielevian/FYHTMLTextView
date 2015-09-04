@@ -50,13 +50,25 @@
         if ([attachment isKindOfClass:[FYAttachment class]]) [(FYAttachment*)attachment forceDealloc];
     }
 
+    [self.textView.subviews enumerateObjectsUsingBlock:^(UIView *obj, NSUInteger idx, BOOL *stop) {
+        [obj.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        [obj removeFromSuperview];
+    }];
+
     [self.textView removeFromSuperview];
     self.textView = nil;
+}
+- (void)relayout {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.textView.attributedTextContentView.layouter = nil;
+        [self.textView.attributedTextContentView relayoutText];
+    });
 }
 
 #pragma mark - DTAttributedTextContentView
 
 - (UIView *)attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView viewForAttachment:(DTTextAttachment *)attachment frame:(CGRect)frame {
+
     if ([attachment isKindOfClass:[FYAttachment class]]) {
         [(FYAttachment*)attachment setTextContentView:attributedTextContentView];
         return [(FYAttachment*)attachment attachmentViewWithFrame:frame];
@@ -75,6 +87,11 @@
     return button;
 }
 - (void)attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView didDrawLayoutFrame:(DTCoreTextLayoutFrame *)layoutFrame inContext:(CGContextRef)context {
+    
+    CGRect frame = self.frame;
+    frame.size.height = layoutFrame.frame.size.height;
+    self.frame = frame;
+
     if (self.delegate && [self.delegate respondsToSelector:@selector(FYHTMLTextView:didUpdateHeight:)]) {
         [self.delegate FYHTMLTextView:self didUpdateHeight:layoutFrame.frame.size.height];
     }

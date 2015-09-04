@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'FYHTMLTextView_Example', :exclusive => true do
+  pod "FYHTMLTextView", :path => "../"
+end
+
+target 'FYHTMLTextView_Tests', :exclusive => true do
+  pod "FYHTMLTextView", :path => "../"
+
+  
+end

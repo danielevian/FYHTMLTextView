@@ -8,6 +8,7 @@
 
 #import "FYAttachment.h"
 #import "FYHTMLTextView.h"
+#import "FYHTMLTextViewSettings.h"
 
 @implementation FYAttachment
 
@@ -30,6 +31,9 @@
 }
 - (void)reLayout {
     if (self.textView) [self.textView relayout];
+}
++ (void)registerClass:(Class)theClass forTagName:(NSString *)tagName {
+    [FYHTMLTextViewSettings registerClass:theClass tagName:tagName];
 }
 
 @end

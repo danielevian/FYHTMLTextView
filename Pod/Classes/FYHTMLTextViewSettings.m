@@ -17,6 +17,8 @@
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
         _sharedInstance = [[FYHTMLTextViewSettings alloc] init];
+        _sharedInstance.registeredTags = [[NSArray alloc] init];
+        _sharedInstance.blockedTags = [[NSArray alloc] init];
     });
     return _sharedInstance;
 }

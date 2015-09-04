@@ -7,7 +7,6 @@
 //
 
 #import "FYHTMLTextView.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface FYHTMLTextView () <DTAttributedTextContentViewDelegate>
 
@@ -22,6 +21,7 @@
     if (self) {
         
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithHTMLData:[htmlString dataUsingEncoding:NSUTF8StringEncoding] options:attributes.attributes documentAttributes:nil];
+        frame.size.height = CGFLOAT_HEIGHT_UNKNOWN;
         frame.size.height = [[[DTCoreTextLayouter alloc] initWithAttributedString:attributedString] layoutFrameWithRect:frame range:NSMakeRange(0, attributedString.length)].frame.size.height;
         
         self.textView = [[DTAttributedTextView alloc] init];

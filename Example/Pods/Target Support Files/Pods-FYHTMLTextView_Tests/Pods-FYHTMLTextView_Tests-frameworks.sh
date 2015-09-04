@@ -51,11 +51,9 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'DTCoreText.framework'
   install_framework 'DTFoundation.framework'
   install_framework 'FYHTMLTextView.framework'
-  install_framework 'SDWebImage.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'DTCoreText.framework'
   install_framework 'DTFoundation.framework'
   install_framework 'FYHTMLTextView.framework'
-  install_framework 'SDWebImage.framework'
 fi

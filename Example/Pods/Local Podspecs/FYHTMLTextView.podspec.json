@@ -1,6 +1,6 @@
 {
   "name": "FYHTMLTextView",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "summary": "UITextView that parses HTML code and transform it to native views.",
   "description": "UITextView that parses HTML code and transform it to NSAttributedString. Also transforms Instagram, Twitter and others embedeed objects to native views.\n",
   "homepage": "https://github.com/fyarad/FYHTMLTextView",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/fyarad/FYHTMLTextView.git",
-    "tag": "1.0.0"
+    "tag": "1.0.2"
   },
   "source_files": [
     "Classes",
@@ -24,9 +24,6 @@
   "dependencies": {
     "DTCoreText": [
       "~> 1.6.16"
-    ],
-    "SDWebImage": [
-
     ]
   }
 }

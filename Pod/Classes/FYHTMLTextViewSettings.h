@@ -10,6 +10,9 @@
 
 @interface FYHTMLTextViewSettings : NSObject
 
+@property (nonatomic, strong) NSArray *blockedTags;
+@property (nonatomic, strong) NSArray *registeredTags;
+
 + (instancetype)sharedInstance;
 + (void)registerClass:(Class)className tagName:(NSString*)name;
 

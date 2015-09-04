@@ -20,6 +20,8 @@
 - (void)forceDealloc;
 - (void)relayout;
 
++ (NSString*)parseHTMLContent:(NSString*)htmlString;
+
 @end
 
 @protocol FYHTMLTextViewDelegate <NSObject>

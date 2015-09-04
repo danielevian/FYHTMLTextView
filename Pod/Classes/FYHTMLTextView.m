@@ -7,6 +7,8 @@
 //
 
 #import "FYHTMLTextView.h"
+#import "FYHTMLTextViewSettings.h"
+#import "NSString+FYHTMLTextView.h"
 
 @interface FYHTMLTextView () <DTAttributedTextContentViewDelegate>
 
@@ -106,6 +108,19 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(FYHTMLTextView:didClickOnLinkURL:)]) {
         [self.delegate FYHTMLTextView:self didClickOnLinkURL:button.URL];
     }
+}
+
+#pragma mark - Helpers
+
++ (NSString*)parseHTMLContent:(NSString *)htmlString {
+    
+    __block NSString *result = htmlString;
+
+    [[[FYHTMLTextViewSettings sharedInstance] blockedTags] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        result = [htmlString removeTagsWithName:obj];
+    }];
+    
+    return [result parseHTMLContentWithRegisteredObjects:[[FYHTMLTextViewSettings sharedInstance] registeredTags]];
 }
 
 @end

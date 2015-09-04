@@ -21,6 +21,7 @@
     return _sharedInstance;
 }
 + (void)registerClass:(Class)className tagName:(NSString *)name {
+    [[self sharedInstance] setRegisteredTags:[[[self sharedInstance] registeredTags] arrayByAddingObject:name]];
     [DTTextAttachment registerClass:className forTagName:name];
 }
 

@@ -90,13 +90,17 @@
 }
 - (void)attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView didDrawLayoutFrame:(DTCoreTextLayoutFrame *)layoutFrame inContext:(CGContextRef)context {
     
-    CGRect frame = self.frame;
-    frame.size.height = layoutFrame.frame.size.height;
-    self.frame = frame;
+    dispatch_async(dispatch_get_main_queue(), ^{
 
-    if (self.delegate && [self.delegate respondsToSelector:@selector(FYHTMLTextView:didUpdateHeight:)]) {
-        [self.delegate FYHTMLTextView:self didUpdateHeight:layoutFrame.frame.size.height];
-    }
+        CGRect frame = self.frame;
+        frame.size.height = layoutFrame.frame.size.height;
+        self.frame = frame;
+        
+        if (self.delegate && [self.delegate respondsToSelector:@selector(FYHTMLTextView:didUpdateHeight:)]) {
+            [self.delegate FYHTMLTextView:self didUpdateHeight:layoutFrame.frame.size.height];
+        }
+
+    });
 }
 - (void)openLink:(DTLinkButton*)button {
     if (self.delegate && [self.delegate respondsToSelector:@selector(FYHTMLTextView:didClickOnLinkURL:)]) {

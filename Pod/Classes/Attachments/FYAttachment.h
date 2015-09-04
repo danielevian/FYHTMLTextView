@@ -7,8 +7,8 @@
 //
 
 #import <DTCoreText/DTCoreText.h>
-#import "FYHTMLTextView.h"
 
+@class FYHTMLTextView;
 @interface FYAttachment : DTTextAttachment
 
 @property (nonatomic, strong) FYHTMLTextView *textView;

@@ -69,12 +69,14 @@
 
 - (UIView *)attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView viewForAttachment:(DTTextAttachment *)attachment frame:(CGRect)frame {
 
-    if ([attachment isKindOfClass:[FYAttachment class]]) {
-        [(FYAttachment*)attachment setTextContentView:attributedTextContentView];
-        return [(FYAttachment*)attachment attachmentViewWithFrame:frame];
+    UIView *result = nil;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(FYHTMLTextView:viewForAttachment:frame:)]) {
+        result = [self.delegate FYHTMLTextView:self viewForAttachment:(FYAttachment*)attachment frame:frame];
     }
-    else if (self.delegate && [self.delegate respondsToSelector:@selector(FYHTMLTextView:viewForAttachment:frame:)]) {
-        return [self.delegate FYHTMLTextView:self viewForAttachment:(FYAttachment*)attachment frame:frame];
+    
+    if (!result && [attachment isKindOfClass:[FYAttachment class]]) {
+        [(FYAttachment*)attachment setTextView:self];
+        return [(FYAttachment*)attachment attachmentViewWithFrame:frame];
     }
     return nil;
 }

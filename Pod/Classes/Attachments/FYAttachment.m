@@ -7,6 +7,7 @@
 //
 
 #import "FYAttachment.h"
+#import "FYHTMLTextView.h"
 
 @implementation FYAttachment
 

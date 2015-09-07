@@ -12,5 +12,7 @@
 
 - (NSString*)parseHTMLContentWithRegisteredObjects:(NSArray*)registeredObjects;
 - (NSString*)removeTagsWithName:(NSString*)tag;
++ (NSString*)getYouTubeIdFromURL:(NSURL*)videoURL;
++ (BOOL)urlIsYoutube:(NSString *)url;
 
 @end

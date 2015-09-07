@@ -22,10 +22,11 @@
             NSString *string = [obj substringWithRange:NSMakeRange(0, endRange.location)];
             NSString *newObject = nil;
             
-            if ([obj stringContains:@"https://www.youtube.com"] && [registeredObjects containsObject:@"youtube"]) {
+            if ([NSString urlIsYoutube:string] && [registeredObjects containsObject:@"youtube"]) {
                 newObject = [string createYoutubeObject];
                 
             }
+            
             if (string && newObject) {
                 result = [result stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"<iframe %@</iframe>", string] withString:newObject];
             }
@@ -141,18 +142,27 @@
 }
 - (NSString*)getYoutubeId {
     __block NSString *postId = nil;
-    [[self componentsSeparatedByString:@"https://www.youtube.com/"] enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
-        if (idx == 1) {
-            NSArray *components = [obj componentsSeparatedByString:@"/"];
-            if (components.count > 0) {
-                components = [[components lastObject] componentsSeparatedByString:@"\""];
-                if (components.count > 0) postId = components[0];
-            }
-        }
+    
+    [[self componentsSeparatedByString:@"\""] enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
+        if ([obj containsString:@"http"]) postId = [NSString getYouTubeIdFromURL:[NSURL URLWithString:obj]];
     }];
+    
     return postId;
 }
-
++ (NSString*)getYouTubeIdFromURL:(NSURL*)videoURL {
+    NSString *result = nil;
+    if ([videoURL.absoluteString stringContains:@"youtu.be/"] || ([videoURL.absoluteString stringContains:@"youtube.com/"] && [videoURL.absoluteString stringContains:@"embed"])) {
+        result = videoURL.pathComponents.lastObject;
+    }
+    else if ([videoURL.absoluteString stringContains:@"youtube.com"] && [videoURL.absoluteString stringContains:@"watch?v="]) {
+        result = [[[[[[[[videoURL.absoluteString stringByReplacingOccurrencesOfString:@"http://" withString:@""] stringByReplacingOccurrencesOfString:@"https://" withString:@""] stringByReplacingOccurrencesOfString:@"www." withString:@""] stringByReplacingOccurrencesOfString:@"youtube.com/" withString:@""] stringByReplacingOccurrencesOfString:@"watch?v=" withString:@""] stringByAppendingString:@"&end"] componentsSeparatedByString:@"&"] firstObject];
+        
+    }
+    return result;
+}
++ (BOOL)urlIsYoutube:(NSString *)url {
+    return ([url stringContains:@"youtube.com"] || [url stringContains:@"youtu.be"]);
+}
 
 #pragma mark - Helpers
 

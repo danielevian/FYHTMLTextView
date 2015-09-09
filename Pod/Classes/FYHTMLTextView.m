@@ -67,6 +67,9 @@
 
 - (UIView *)attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView viewForAttachment:(DTTextAttachment *)attachment frame:(CGRect)frame {
     
+    frame.size.width = self.textView.frame.size.width;
+    attachment.originalSize = CGSizeMake(frame.size.width, attachment.originalSize.height);
+    
     UIView *result = nil;
     if (self.delegate && [self.delegate respondsToSelector:@selector(FYHTMLTextView:viewForAttachment:frame:)]) {
         result = [self.delegate FYHTMLTextView:self viewForAttachment:(FYAttachment*)attachment frame:frame];

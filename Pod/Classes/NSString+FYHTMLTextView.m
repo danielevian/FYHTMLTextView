@@ -144,7 +144,7 @@
     __block NSString *postId = nil;
     
     [[self componentsSeparatedByString:@"\""] enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
-        if ([obj containsString:@"http"]) postId = [NSString getYouTubeIdFromURL:[NSURL URLWithString:obj]];
+        if ([obj stringContains:@"http"]) postId = [NSString getYouTubeIdFromURL:[NSURL URLWithString:obj]];
     }];
     
     return postId;

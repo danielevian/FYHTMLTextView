@@ -58,8 +58,7 @@
 }
 - (void)relayout {
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.textView.attributedTextContentView.layouter = nil;
-        [self.textView.attributedTextContentView relayoutText];
+        [self.textView relayoutText];
     });
 }
 

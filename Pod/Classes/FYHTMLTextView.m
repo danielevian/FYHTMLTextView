@@ -56,6 +56,10 @@
     [self.textView removeFromSuperview];
     self.textView = nil;
 }
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self.textView layoutSubviews];
+}
 - (void)relayout {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.textView relayoutText];

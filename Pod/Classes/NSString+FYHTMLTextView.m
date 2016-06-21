@@ -98,7 +98,7 @@
 }
 - (NSString*)getInstagramMediaId {
     __block NSString *postId = nil;
-    [[self componentsSeparatedByString:@"https://instagram.com/p/"] enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
+    [[self componentsSeparatedByString:@"https://www.instagram.com/p/"] enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
         if (idx == 1) {
             NSArray *components = [obj componentsSeparatedByString:@"/"];
             if (components.count > 0) postId = components[0];
